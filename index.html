@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saileen Bianca Baldonado · AI Annotation Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --bg2:#141416; --card:#17171a; --card2:#1c1c20; --line:#2b2b31;
+    --gold:#d4af5f; --gold2:#8a6e2e; --gold-hi:#f0d894;
+    --ink:#f4f1e8; --soft:#a8a498; --faint:#161619;
+    --serif:"Lora",Georgia,serif; --sans:"Inter",-apple-system,sans-serif;
+  }
+  [data-theme="light"]{
+    --bg:#f5f2ea; --bg2:#fffdf7; --card:#ffffff; --card2:#fbf9f3; --line:#e5dfd0;
+    --gold:#9a7a24; --gold2:#b89235; --gold-hi:#7a5f1c;
+    --ink:#1a1813; --soft:#6b6559; --faint:#eee9dc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:400;
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    transition:background .4s ease,color .4s ease}
+  /* subtle grain */
+  body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .serif{font-family:var(--serif)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;position:relative;z-index:2}
+  @media(max-width:600px){.wrap{padding:0 24px}}
+
+  /* scroll progress */
+  #prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:100;
+    background:linear-gradient(90deg,var(--gold2),var(--gold),var(--gold-hi))}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:60;
+    background:color-mix(in srgb,var(--bg) 82%,transparent);
+    backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;
+    max-width:1080px;margin:0 auto;padding:18px 40px}
+  @media(max-width:600px){nav{padding:16px 24px}}
+  .brand{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.01em;color:var(--ink)}
+  .brand .d{color:var(--gold)}
+  .links{display:flex;gap:30px;align-items:center}
+  .links a{color:var(--soft);text-decoration:none;font-size:13px;letter-spacing:.02em;
+    font-weight:500;position:relative;transition:color .25s}
+  .links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;
+    background:var(--gold);transition:width .3s ease}
+  .links a:hover{color:var(--ink)}
+  .links a:hover::after{width:100%}
+  .toggle{background:transparent;border:1px solid var(--line);color:var(--ink);
+    border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:14px;
+    display:grid;place-items:center;transition:border-color .25s,transform .3s}
+  .toggle:hover{border-color:var(--gold);transform:rotate(20deg)}
+  @media(max-width:720px){.links a:not(.toggle){display:none}}
+  @media(max-width:720px){.hero .mono{font-size:44vw;right:-4%;opacity:.6}}
+
+  /* motif bits */
+  .tick{display:inline-block;width:30px;height:1.5px;background:linear-gradient(90deg,var(--gold),transparent);vertical-align:middle;margin-right:16px}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+    font-weight:600;display:flex;align-items:center;margin-bottom:30px}
+
+  /* hero */
+  .hero{position:relative;padding:150px 0 110px;overflow:hidden}
+  .hero .mono{position:absolute;right:2%;top:50%;transform:translateY(-50%);
+    font-family:var(--serif);font-weight:900;font-size:32vw;line-height:.8;
+    color:transparent;-webkit-text-stroke:1.5px var(--faint);
+    user-select:none;pointer-events:none;z-index:0;overflow:visible}
+  [data-theme="light"] .hero .mono{-webkit-text-stroke:1.5px #e8e2d3}
+  .hero .inner{position:relative;z-index:2}
+  .hero h1{font-family:var(--serif);font-size:clamp(48px,9vw,104px);line-height:.94;
+    font-weight:700;letter-spacing:-.02em;font-optical-sizing:auto}
+  .hero h1 .g{font-weight:700;
+    background:linear-gradient(120deg,var(--gold2),var(--gold),var(--gold-hi));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero .rule{width:0;height:1.5px;background:linear-gradient(90deg,var(--gold),transparent);margin:36px 0 24px}
+  .hero .tag{font-size:clamp(16px,2.2vw,21px);color:var(--soft);max-width:600px;font-weight:300;line-height:1.6}
+  .hero .tag em{font-style:italic;color:var(--ink)}
+  .hero .meta{margin-top:48px;display:flex;flex-wrap:wrap;gap:10px 34px;
+    font-size:13px;color:var(--soft);letter-spacing:.03em}
+  .hero .meta a{color:var(--soft);text-decoration:none;transition:color .25s}
+  .hero .meta a:hover{color:var(--gold)}
+
+  /* sections */
+  section{position:relative;padding:96px 0}
+  .divider{height:1px;background:var(--line);position:relative;overflow:hidden}
+  .divider::after{content:"";position:absolute;left:0;top:0;height:100%;width:0;
+    background:linear-gradient(90deg,var(--gold),transparent);transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+  .divider.in::after{width:38%}
+  .ghost{position:absolute;right:-10px;top:40px;font-family:var(--serif);font-weight:900;
+    font-size:150px;line-height:1;color:var(--faint);user-select:none;pointer-events:none;z-index:0}
+  .sec-inner{position:relative;z-index:2}
+  h2{font-family:var(--serif);font-size:clamp(26px,4.6vw,48px);font-weight:700;
+    letter-spacing:-.015em;line-height:1.05;margin-bottom:34px;white-space:nowrap}
+  @media(max-width:600px){h2{white-space:normal}}
+  h2 .g{color:var(--gold)}
+  p.lead{color:var(--ink);font-size:18px;max-width:660px;line-height:1.75;font-weight:300}
+  .muted{color:var(--soft)}
+
+  .split{display:grid;grid-template-columns:1.25fr .9fr;gap:44px;align-items:start}
+  @media(max-width:800px){.split{grid-template-columns:1fr;gap:28px}h2{max-width:100%}}
+
+  .card{background:linear-gradient(160deg,var(--card),var(--card2));
+    border:1px solid var(--line);border-radius:18px;padding:30px;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+  .card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--gold) 40%,var(--line));
+    box-shadow:0 20px 50px -24px rgba(0,0,0,.6)}
+  .factrow{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+  .factrow:last-child{border-bottom:none}
+  .factrow .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;white-space:nowrap}
+  .factrow .v{font-size:14.5px;color:var(--ink);text-align:right}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media(max-width:800px){.two,.three{grid-template-columns:1fr}}
+  .sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+  .colcard .n{font-family:var(--serif);font-size:34px;font-weight:700;
+    background:linear-gradient(120deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .colcard h3{font-family:var(--serif);font-size:19px;color:var(--ink);margin:4px 0 0;font-weight:600}
+  .colcard .dv{height:1px;background:var(--line);margin:16px 0}
+  ul.clean{list-style:none}
+  ul.clean li{position:relative;padding-left:20px;margin-bottom:11px;font-size:14.5px;color:var(--ink)}
+  ul.clean li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;
+    border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 18%,transparent)}
+  ul.clean.soft li{color:var(--soft)}
+
+  /* experience */
+  .exp{background:linear-gradient(160deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:18px;padding:32px;margin-bottom:20px;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+  .exp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--gold),transparent);opacity:0;transition:opacity .4s}
+  .exp:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--gold) 40%,var(--line));box-shadow:0 20px 50px -24px rgba(0,0,0,.6)}
+  .exp:hover::before{opacity:1}
+  .exp .top{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
+  .exp .role{font-family:var(--serif);font-size:23px;font-weight:600}
+  .exp .org{color:var(--gold);font-size:14px;font-weight:500;letter-spacing:.02em}
+  .exp .dv{height:1px;background:var(--line);margin:16px 0 18px}
+  .exp ul{list-style:none}
+  .exp li{position:relative;padding-left:24px;margin-bottom:11px;color:var(--soft);font-size:15px;line-height:1.6}
+  .exp li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;
+    background:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 16%,transparent)}
+
+  /* workflow */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:800px){.flow{grid-template-columns:1fr 1fr}}
+  .step{position:relative;padding-top:8px}
+  .step .n{font-family:var(--serif);font-size:40px;font-weight:700;
+    background:linear-gradient(120deg,var(--gold2),var(--gold),var(--gold-hi));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .step .bar{width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:12px 0 16px;transition:width .8s ease .2s}
+  .step.in .bar{width:44px}
+  .step h4{font-family:var(--serif);font-size:19px;margin-bottom:9px;font-weight:600}
+  .step p{font-size:13.5px;color:var(--soft);line-height:1.55}
+
+  /* contact */
+  .contact-big{font-family:var(--serif);font-size:clamp(32px,6vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:28px}
+  .contact-big .g{background:linear-gradient(120deg,var(--gold2),var(--gold),var(--gold-hi));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .clinks{display:flex;flex-wrap:wrap;gap:14px 20px;margin-top:8px}
+  .clink{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border:1px solid var(--line);
+    border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;
+    transition:border-color .3s,transform .3s,background .3s}
+  .clink:hover{border-color:var(--gold);transform:translateY(-2px);background:color-mix(in srgb,var(--gold) 8%,transparent)}
+  .clink .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .clink-static{cursor:default;color:var(--soft)}
+  .clink-static:hover{border-color:var(--line);transform:none;background:transparent}
+
+  footer{padding:48px 0;text-align:center;color:var(--soft);font-size:12px;letter-spacing:.06em;border-top:1px solid var(--line);position:relative;z-index:2}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .hero .h-anim{opacity:0;transform:translateY(28px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero .h-anim.d1{animation-delay:.05s}.hero .h-anim.d2{animation-delay:.2s}
+  .hero .h-anim.d3{animation-delay:.38s}.hero .h-anim.d4{animation-delay:.54s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){
+    .reveal,.hero .h-anim{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+    .divider::after,.step .bar{transition:none}
+    .hero .rule{width:64px!important}
+  }
+  :focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<header>
+  <nav>
+    <div class="brand serif">Saileen<span class="d">.</span></div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#method">Method</a>
+      <a href="#contact">Contact</a>
+      <button class="toggle" id="tgl" onclick="toggleTheme()" aria-label="Toggle theme">◑</button>
+    </div>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="mono serif">SB</div>
+  <div class="wrap inner">
+    <div class="eyebrow h-anim d1"><span class="tick"></span>AI Data Annotation Specialist &nbsp;·&nbsp; AI Quality Reviewer &nbsp;·&nbsp; AI Trainer</div>
+    <h1 class="serif"><span class="h-anim d2" style="display:block">Saileen Bianca</span><span class="g h-anim d3" style="display:block">Baldonado</span></h1>
+    <div class="rule" id="hrule"></div>
+    <p class="tag h-anim d4">Multi-modal annotation, computer vision and data quality — <em>built on a designer's precision</em>.</p>
+    <div class="meta h-anim d4">
+      <span>Davao City, Philippines</span>
+      <span><a href="mailto:biancasaileen@gmail.com">biancasaileen@gmail.com</a></span>
+      <span><a href="tel:09639134262">09639134262</a></span>
+      <span><a href="https://www.linkedin.com/in/saileen-bianca-baldonado/">LinkedIn</a></span>
+      <span><a href="https://biancasaileen.github.io/saileenbianca-portfolio/">Portfolio</a></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<div class="wrap">
+
+  <section id="about">
+    <div class="ghost serif">01</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>About</div>
+      <h2 class="serif reveal" style="white-space:normal">A designer's <span class="g">precision</span>,<br>applied to data</h2>
+      <div class="split">
+        <p class="lead reveal">I am an AI data annotation contributor with hands-on freelance experience across leading platforms, working on multi-modal projects spanning image, text, audio, and video data. My Bachelor of Science in Architecture from the University of Mindanao trained a habit of precision, spatial reasoning, and visual attention to detail — the same instincts that produce accurate, consistent annotation and reliable quality review.</p>
+        <div class="card reveal">
+          <div class="factrow"><span class="k">Modalities</span><span class="v">Image · Text · Audio · Video</span></div>
+          <div class="factrow"><span class="k">Focus</span><span class="v">Annotation &amp; Quality Review</span></div>
+          <div class="factrow"><span class="k">Education</span><span class="v">BS Architecture,<br>University of Mindanao</span></div>
+          <div class="factrow"><span class="k">Based in</span><span class="v">Davao City, Philippines</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="profile">
+    <div class="ghost serif">02</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Profile</div>
+      <h2 class="serif reveal">What I bring to <span class="g">AI pipelines</span></h2>
+      <div class="two">
+        <div class="card reveal">
+          <div class="sub">Summary</div>
+          <p class="muted" style="font-size:15px;line-height:1.75;font-weight:300">Skilled in bounding box, polygon, semantic and instance segmentation, object detection, content moderation, and search relevance evaluation. Detail-oriented and committed to high data quality standards across changing project requirements.</p>
+        </div>
+        <div class="card reveal">
+          <div class="sub">Career Objective</div>
+          <p class="muted" style="font-size:15px;line-height:1.75;font-weight:300">To contribute precise, high-quality annotation and quality review to AI training pipelines in a remote, international role, while growing within AI operations, content moderation, and data quality assurance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="experience">
+    <div class="ghost serif">03</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Experience</div>
+      <h2 class="serif reveal">Three <span class="g">verified</span> roles</h2>
+
+      <div class="exp reveal">
+        <div class="top"><span class="role serif">AI Data Annotation Specialist</span><span class="org">Remotasks · Freelance</span></div>
+        <div class="dv"></div>
+        <ul>
+          <li>Performed AI data annotation, AI training, and quality evaluation across text, image, and search relevance tasks.</li>
+          <li>Executed computer-vision annotation including bounding box, polygon, semantic and instance segmentation, keypoint/landmark, object detection, and image classification.</li>
+          <li>Maintained annotation accuracy across changing project requirements and evolving guidelines.</li>
+        </ul>
+      </div>
+
+      <div class="exp reveal">
+        <div class="top"><span class="role serif">Quality Analyst</span><span class="org">Pactera EDGE · Freelance</span></div>
+        <div class="dv"></div>
+        <ul>
+          <li>Reviewed AI-generated data for quality, accuracy, and guideline compliance.</li>
+          <li>Validated and evaluated annotations against client standards, flagging inconsistencies for correction.</li>
+        </ul>
+      </div>
+
+      <div class="exp reveal">
+        <div class="top"><span class="role serif">Content Moderator</span><span class="org">clickworker · Freelance</span></div>
+        <div class="dv"></div>
+        <ul>
+          <li>Reviewed and moderated text and image content according to platform guidelines.</li>
+          <li>Completed search relevance evaluation and data validation to support AI model training.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="skills">
+    <div class="ghost serif">04</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Capabilities</div>
+      <h2 class="serif reveal">Annotation, vision &amp; <span class="g">quality</span></h2>
+      <div class="three">
+        <div class="card colcard reveal">
+          <div class="n serif">01</div><h3 class="serif">Annotation</h3><div class="dv"></div>
+          <ul class="clean"><li>Image</li><li>Text</li><li>Audio</li><li>Video</li><li>Data Labeling</li></ul>
+        </div>
+        <div class="card colcard reveal">
+          <div class="n serif">02</div><h3 class="serif">Computer Vision</h3><div class="dv"></div>
+          <ul class="clean"><li>Bounding Box</li><li>Polygon</li><li>Semantic Segmentation</li><li>Instance Segmentation</li><li>Keypoint / Landmark</li><li>Object Detection</li><li>Classification</li></ul>
+        </div>
+        <div class="card colcard reveal">
+          <div class="n serif">03</div><h3 class="serif">Data Quality</h3><div class="dv"></div>
+          <ul class="clean"><li>Validation</li><li>Content Moderation</li><li>Search Relevance</li><li>QA Control</li></ul>
+        </div>
+      </div>
+      <div class="two" style="margin-top:24px">
+        <div class="card reveal">
+          <div class="sub">AI &amp; Productivity Tools</div>
+          <ul class="clean"><li>ChatGPT</li><li>Claude</li><li>Canva</li><li>Filmora</li><li>Microsoft Office</li></ul>
+        </div>
+        <div class="card reveal">
+          <div class="sub">Transferable Technical</div>
+          <ul class="clean soft"><li>AutoCAD</li><li>SketchUp</li><li>D5 Render</li><li>Lumion · V-Ray</li><li>Adobe Photoshop</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="method">
+    <div class="ghost serif">05</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Method</div>
+      <h2 class="serif reveal">How I keep data <span class="g">clean</span></h2>
+      <div class="flow">
+        <div class="step reveal"><div class="n serif">01</div><div class="bar"></div><h4 class="serif">Read Guidelines</h4><p>Study client instructions and edge cases before labeling.</p></div>
+        <div class="step reveal"><div class="n serif">02</div><div class="bar"></div><h4 class="serif">Annotate</h4><p>Label precisely across the required modality and task type.</p></div>
+        <div class="step reveal"><div class="n serif">03</div><div class="bar"></div><h4 class="serif">Self-Review</h4><p>Validate accuracy, consistency, and guideline compliance.</p></div>
+        <div class="step reveal"><div class="n serif">04</div><div class="bar"></div><h4 class="serif">Deliver &amp; Adapt</h4><p>Submit quality output and adapt to feedback and updates.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="development">
+    <div class="ghost serif">06</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Growth</div>
+      <h2 class="serif reveal">Always <span class="g">sharpening</span></h2>
+      <p class="lead muted reveal">Continuously expanding expertise in multi-modal annotation and AI data quality workflows, and staying familiar with the annotation standards used by leading AI data providers. Education: Bachelor of Science in Architecture, University of Mindanao (2024).</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact">
+    <div class="ghost serif">07</div>
+    <div class="sec-inner">
+      <div class="eyebrow reveal"><span class="tick"></span>Contact</div>
+      <div class="contact-big serif reveal">Let's <span class="g">work</span> together</div>
+      <div class="clinks reveal">
+        <a class="clink" href="mailto:biancasaileen@gmail.com"><span class="dot"></span>biancasaileen@gmail.com</a>
+        <a class="clink" href="tel:09639134262"><span class="dot"></span>09639134262</a>
+        <a class="clink" href="https://www.linkedin.com/in/saileen-bianca-baldonado/"><span class="dot"></span>linkedin.com/in/saileen-bianca-baldonado</a>
+        <a class="clink" href="https://biancasaileen.github.io/saileenbianca-portfolio/"><span class="dot"></span>biancasaileen.github.io/saileenbianca-portfolio</a>
+        <span class="clink clink-static"><span class="dot"></span>Davao City, Philippines</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>© <span id="yr"></span> Saileen Bianca Baldonado — AI Annotation Portfolio</footer>
+
+<script>
+  function toggleTheme(){
+    const r=document.documentElement;
+    const next=r.getAttribute('data-theme')==='dark'?'light':'dark';
+    r.setAttribute('data-theme',next);
+  }
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  // hero rule draw-in
+  window.addEventListener('load',()=>{setTimeout(()=>{const hr=document.getElementById('hrule');if(hr)hr.style.width='64px';hr&&(hr.style.transition='width .9s cubic-bezier(.2,.7,.2,1)');},650)});
+  // reveals + dividers + steps
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+  document.querySelectorAll('.reveal,.divider,.step').forEach((el)=>io.observe(el));
+  // stagger reveals within a grid
+  document.querySelectorAll('.three,.two,.flow').forEach(g=>{[...g.children].forEach((c,i)=>{c.style.transitionDelay=(i*80)+'ms'})});
+  // scroll progress
+  const prog=document.getElementById('prog');
+  addEventListener('scroll',()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);prog.style.width=(p*100)+'%'},{passive:true});
+</script>
+</body>
+</html>
