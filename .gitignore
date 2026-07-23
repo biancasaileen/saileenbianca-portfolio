@@ -1,0 +1,24 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Dependencies / build (if you later add a build step)
+node_modules/
+dist/
+build/
+.cache/
+
+# Logs / env
+*.log
+.env
+.env.*
+
+# Local scratch
+scraps/
+screenshots/
+*.thumbnail.png
+.thumbnail
+.image-slots.state.json
