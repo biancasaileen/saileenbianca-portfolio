@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Add your production sitemap once the domain is live:
-# Sitemap: https://YOUR-DOMAIN/sitemap.xml
