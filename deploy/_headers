@@ -1,0 +1,24 @@
+# Netlify security headers — copy this file to the publish root as `_headers`
+# (or paste into netlify.toml). CSP is scoped to exactly what this site loads.
+#
+# The page boots via a client-side Design-Component runtime (support.js):
+#   - it evaluates the logic class with `new Function` and loads React/ReactDOM
+#     (+ Babel for JSX imports) from unpkg with SRI  -> script-src needs
+#     'unsafe-eval' and https://unpkg.com
+#   - authored style="" attrs are applied by React via CSSOM (not CSP-governed),
+#     but the runtime injects a few <style> textContent blocks -> style-src
+#     needs 'unsafe-inline'
+#   - script-src 'unsafe-inline' is NOT required and is intentionally omitted.
+# See the report / precompile note for how to drop the remaining exceptions.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' https://unpkg.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+  X-DNS-Prefetch-Control: off
